@@ -31,7 +31,7 @@ const Timetable = () => {
   useEffect(() => {
     localStorage.setItem('currentGrade', JSON.stringify(currentGrade))
 
-    if (currentGrade.value) {
+    if (currentGrade.value !== undefined) {
       getWeekTimetable(currentGrade.value)
         .then((timetable) => {
           setTimetable(timetable)
