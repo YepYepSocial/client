@@ -1,0 +1,35 @@
+.main {
+    background: #0d0d0d;
+    border-radius: 8px;
+    border: solid #212121 1px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    height: 55px;
+}
+
+.optionsContainer {
+    background: #0d0d0d;
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+    min-height: 120px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.option {
+    width: 100%;
+    padding: 12px 0 12px 0;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+}
+
+.option:active {
+    background: #1a1a1a;
+}

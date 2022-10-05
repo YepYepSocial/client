@@ -1,0 +1,12 @@
+.main {
+    background: #0d0d0d;
+    border-radius: 8px;
+    border: solid #212121 1px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    height: 200px;
+    overflow: hidden;
+}
