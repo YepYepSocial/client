@@ -9,4 +9,4 @@ document.body.classList.toggle('dark', true);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);
 
-serviceWorkerRegistration.unregister();
+serviceWorkerRegistration.register();
