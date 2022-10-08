@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useEffect, useMemo} from 'react';
+import React, {useCallback, useContext, useEffect, useMemo, useState} from 'react';
 import {IonContent, IonPage} from "@ionic/react";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import Select from "../../components/select/Select";
@@ -9,9 +9,11 @@ import {AppContext} from "../../AppContext";
 import {weekdays} from "../../helpers/weekdays";
 import {getWeekTimetable} from "../../api/getWeekTimetable";
 import {Typography} from "@mui/material";
+import TimetableItemLoader from "./timetableItemLoader/TimetableItemLoader";
 
 const Timetable = () => {
   const { weekday, setWeekday, grades, timetable, setTimetable, currentGrade, setCurrentGrade } = useContext(AppContext);
+  const [isTimetableLoading, setIsTimetableLoading] = useState(false);
 
   const weekdayOptions = useMemo(() => {
     return weekdays.map((weekday, value) => ({ label: weekday, value }))
@@ -32,9 +34,14 @@ const Timetable = () => {
     localStorage.setItem('currentGrade', JSON.stringify(currentGrade))
 
     if (currentGrade.value !== undefined) {
+      setIsTimetableLoading(true)
+
       getWeekTimetable(currentGrade.value)
         .then((timetable) => {
           setTimetable(timetable)
+        })
+        .finally(() => {
+          setIsTimetableLoading(false)
         })
     }
   }, [currentGrade])
@@ -50,7 +57,15 @@ const Timetable = () => {
           <Grid2 item pt={1} pb={2} width={'100%'}>
             <Options options={weekdayOptions} value={weekday.value} onOptionClick={onOptionClick}/>
           </Grid2>
-          {!currentGrade.value ? (
+          {isTimetableLoading ? (
+            <>
+              {Array.from({length: 7}).map((_, index) => (
+                <Grid2 key={index} pb={1} width={'100%'}>
+                  <TimetableItemLoader />
+                </Grid2>
+              ))}
+            </>
+          ) : currentGrade?.value === undefined ? (
             <Typography fontWeight={'bold'} p={2} textAlign={'center'} ml={'auto'} mr={'auto'}>
               Выберите свой класс
             </Typography>

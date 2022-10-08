@@ -1,1 +1,1 @@
-export const weekdays = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'];
+export const weekdays = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ'];
